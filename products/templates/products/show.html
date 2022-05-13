@@ -3,9 +3,16 @@
 {% block content %}
 <p class="lead">Details for {{product.name}}</p>
 <dl>
-    <dt>Description</dt><dd>{{product.description}}</dd>
-    <dt>Ages</dt><dd>{{product.age_range}}</dd>
-    <dt>Price</dt><dd>{{product.price}}</dd>
+  <dt>Description</dt><dd>{{product.description}}</dd>
+  <dt>Ages</dt><dd>{{product.age_range}}</dd>
+  <dt>Price</dt><dd>{{product.price}}</dd>
+  {% for img in product.productimage_set.all %}
+    {% if img.height_field > img.width_field %}
+      <dd><img src="{{ img.image.url }}" height = 300 alt="{{ img.caption }}"></img>
+    {% else %}
+      <dd><img src="{{ img.image.url }}" width = 300 alt="{{ img.caption }}"></img>
+    {% endif %}
+  {% endfor %}
 </dl>
 {% endblock %}
 
